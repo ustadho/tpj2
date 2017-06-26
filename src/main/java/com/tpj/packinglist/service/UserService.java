@@ -2,9 +2,9 @@ package com.tpj.packinglist.service;
 
 import com.tpj.packinglist.domain.Authority;
 import com.tpj.packinglist.domain.User;
-import com.tpj.packinglist.repository.AuthorityRepository;
-import com.tpj.packinglist.repository.PersistentTokenRepository;
-import com.tpj.packinglist.repository.UserRepository;
+import com.tpj.packinglist.dao.AuthorityRepository;
+import com.tpj.packinglist.dao.PersistentTokenRepository;
+import com.tpj.packinglist.dao.UserRepository;
 import com.tpj.packinglist.security.AuthoritiesConstants;
 import com.tpj.packinglist.security.SecurityUtils;
 import com.tpj.packinglist.service.util.RandomUtil;
@@ -193,6 +193,10 @@ public class UserService {
         });
     }
 
+    public User getCurrentUser(){
+        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+    }
+    
     @Transactional(readOnly = true)    
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAll(pageable).map(UserDTO::new);

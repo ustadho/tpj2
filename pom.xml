@@ -14,7 +14,7 @@
     <artifactId>tpj</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>tpj-packing-list</name>
+    <name>tpj2</name>
     
     <prerequisites>
         <maven>3.0.0</maven>

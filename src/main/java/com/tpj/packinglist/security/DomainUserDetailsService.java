@@ -1,7 +1,7 @@
 package com.tpj.packinglist.security;
 
+import com.tpj.packinglist.dao.UserRepository;
 import com.tpj.packinglist.domain.User;
-import com.tpj.packinglist.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;

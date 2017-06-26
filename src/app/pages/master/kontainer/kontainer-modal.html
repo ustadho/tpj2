@@ -1,0 +1,32 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="form1" id="formRate">
+            <div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="nama">Nomor</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.status.$invalid}">
+                        <input name="nama" type="text" class="form-control" id="nama" ng-model="vm.nomor" required autofocus/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.nama.$error.required">
+                            Harus Diisi
+                        </span>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="isNamaExists">
+                            Nama sudah terpakai
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+    </div>
+</div>

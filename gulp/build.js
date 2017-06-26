@@ -34,7 +34,7 @@ gulp.task('html', ['inject', 'partials'], function () {
   };
 
   var htmlFilter = $.filter('*.html', { restore: true, dot:true});
-  var jsFilter = $.filter('**/*.js', { restore: true, dot:true});
+  var jsFilter = $.filter('**/**.js', { restore: true, dot:true});
   var cssFilter = $.filter('**/*.css', { restore: true, dot:true});
   var assets;
 
@@ -85,7 +85,7 @@ gulp.task('other', ['copyVendorImages'], function () {
   return gulp.src([
     path.join(conf.paths.src, '/**/*'),
     path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss,md}'),
-    path.join(conf.paths.tmp, '/serve/**/assets/img/theme/vendor/**/*'),
+    path.join(conf.paths.tmp, '/serve/**/assets/img/theme/vendor/**/*'), 
     '!src/main', '!src/main/**'
   ])
     .pipe(fileFilter)

@@ -1,10 +1,10 @@
 package com.tpj.packinglist.security;
 
-import com.tpj.packinglist.domain.PersistentToken;
-import com.tpj.packinglist.repository.PersistentTokenRepository;
-import com.tpj.packinglist.repository.UserRepository;
-import com.tpj.packinglist.service.util.RandomUtil;
 
+import com.tpj.packinglist.dao.UserRepository;
+import com.tpj.packinglist.dao.PersistentTokenRepository;
+import com.tpj.packinglist.domain.PersistentToken;
+import com.tpj.packinglist.service.util.RandomUtil;
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.slf4j.Logger;

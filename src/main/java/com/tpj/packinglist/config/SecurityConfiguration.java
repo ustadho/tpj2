@@ -1,7 +1,6 @@
 package com.tpj.packinglist.config;
 
-import com.tpj.packinglist.security.AuthoritiesConstants;
-import com.tpj.packinglist.security.RestUnauthorizedEntryPoint;
+import com.tpj.packinglist.security.*;
 
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.security.*;
@@ -26,7 +25,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.PostConstruct;
-import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -42,22 +40,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final RememberMeServices rememberMeServices;
 
     private final CorsFilter corsFilter;
-    
-    private final RestUnauthorizedEntryPoint restAuthenticationEntryPoint;
-    
-    private final AccessDeniedHandler restAccessDeniedHandler;
 
     public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService,
-            JHipsterProperties jHipsterProperties, RememberMeServices rememberMeServices, CorsFilter corsFilter, 
-            RestUnauthorizedEntryPoint restAuthenticationEntryPoint, AccessDeniedHandler restAccessDeniedHandler) {
+            JHipsterProperties jHipsterProperties, RememberMeServices rememberMeServices,
+            CorsFilter corsFilter) {
 
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDetailsService = userDetailsService;
         this.jHipsterProperties = jHipsterProperties;
         this.rememberMeServices = rememberMeServices;
         this.corsFilter = corsFilter;
-        this.restAuthenticationEntryPoint = restAuthenticationEntryPoint;
-        this.restAccessDeniedHandler = restAccessDeniedHandler;
     }
 
     @PostConstruct
@@ -117,10 +109,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(http401UnauthorizedEntryPoint())
-            .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(restAuthenticationEntryPoint)
-                .accessDeniedHandler(restAccessDeniedHandler)
             .and()
                 .formLogin()
                 .loginProcessingUrl("/api/authentication")

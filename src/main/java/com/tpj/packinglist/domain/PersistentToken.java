@@ -1,26 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tpj.packinglist.domain;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.io.Serializable;
 import java.time.LocalDate;
-
-import javax.persistence.*;
+import java.time.format.DateTimeFormatter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * Persistent tokens are used by Spring Security to automatically log in users.
  *
- * @see id.alfatih.security.PersistentTokenRememberMeServices
+ * @author ustadho
  */
 @Entity
-@Table(name = "c_persistent_token")
+@Table(name = "c_security_persistent_token")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class PersistentToken implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class PersistentToken implements Serializable{
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d MMMM yyyy");
 
     private static final int MAX_USER_AGENT_LEN = 255;
 
@@ -31,7 +39,8 @@ public class PersistentToken implements Serializable {
     @NotNull
     @Column(name = "token_value", nullable = false)
     private String tokenValue;
-    
+
+    @JsonIgnore
     @Column(name = "token_date")
     private LocalDate tokenDate;
 
@@ -69,6 +78,11 @@ public class PersistentToken implements Serializable {
 
     public void setTokenDate(LocalDate tokenDate) {
         this.tokenDate = tokenDate;
+    }
+
+    @JsonGetter
+    public String getFormattedTokenDate() {
+        return DATE_TIME_FORMATTER.format(this.tokenDate);
     }
 
     public String getIpAddress() {

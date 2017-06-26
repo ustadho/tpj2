@@ -1,10 +1,9 @@
 package com.tpj.packinglist.service.dto;
 
-import com.tpj.packinglist.config.Constants;
 
+import com.tpj.packinglist.config.Constants;
 import com.tpj.packinglist.domain.Authority;
 import com.tpj.packinglist.domain.User;
-
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.*;

@@ -1,7 +1,7 @@
 package com.tpj.packinglist.service;
 
 import com.tpj.packinglist.config.audit.AuditEventConverter;
-import com.tpj.packinglist.repository.PersistenceAuditEventRepository;
+import com.tpj.packinglist.dao.PersistenceAuditEventRepository;
 import java.time.LocalDateTime;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.data.domain.Page;

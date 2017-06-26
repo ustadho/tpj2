@@ -1,0 +1,44 @@
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" form-group input-group">
+                <input id="search" type="text" class="col-xs-2 form-control" ng-model="search" ng-keypress="$event.keyCode == 13 ? reloadData() : undefined"placeholder="Masukkan pencarian" autofocus>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="reloadData()"><i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
+            <div ba-panel ba-panel-title="Master Kondisi" ba-panel-class="with-scroll">
+                <table class="table table-bordered table-hover table-condensed">
+                    <tr>
+                        <td></td>
+                        <td>Nama Kota</td>
+                        <td>
+                            <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="c in dataPage.content" class="editable-row">
+                        <td>
+                            {{((paging.currentPage-1)*paging.maxSize)+$index + 1}}
+                        </td>
+                        <td>
+                            {{ c.nama || 'empty' }}
+                        </td>
+                        <td>
+                            <div class="buttons" >
+                                <button class="btn btn-primary editable-table-button btn-xs" 
+                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/kondisi/kondisi-modal.html', 'md')">Edit</button>
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Kondisi {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div align="center" ng-show="dataPage.totalPages > 1">
+                    <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                    <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

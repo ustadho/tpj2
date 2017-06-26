@@ -1,40 +1,130 @@
 {
-  "name": "example",
-  "version": "0.0.1",
+  "name": "blur-admin",
+  "version": "1.3.1",
+  "homepage": "https://github.com/1itvinka/blur-admin",
+  "authors": [
+    "akveo"
+  ],
+  "description": "Blur Admin HTML template",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
-    "jquery": "2.1.4",
-    "angular": "~1.4",
-    "angular-route": "~1.4",
-    "angular-resource": "~1.4",
-    "angular-sanitize": "~1.4",
-    "angular-animate": "~1.4",
-    "angular-spinkit": "0.3.3",
-    "angular-http-auth": "1.2.2",
-    "bootstrap": "3.3.5",
-    "bootstrap-material-design": "0.4.4",
-    "angular-swagger-ui": "~0.2.3",
-    "font-awesome": "4.5.0"
+    "jquery": "~3.1.1",
+    "jquery-ui": "~1.12.1",
+    "jquery.easing": "~1.3.1",
+    "jquery.easy-pie-chart": "~2.1.6",
+    "chart.js": "~2.4.0",
+    "Ionicons": "ionicons#~2.0.1",
+    "amcharts": "~3.15.2",
+    "amcharts-stock": "*",
+    "ammap": "~3.14.5",
+    "angular": "~1.5.8",
+    "angular-route": "~1.5.8",
+    "angular-slimscroll": "~1.1.5",
+    "angular-smart-table": "~2.1.3",
+    "angular-toastr": "~2.1.1",
+    "angular-touch": "~1.5.8",
+    "angular-ui-sortable": "~0.15.0",
+    "animate.css": "~3.5.2",
+    "bootstrap": "~3.3.5",
+    "bootstrap-select": "~1.12.1",
+    "bootstrap-switch": "~3.3.2",
+    "bootstrap-tagsinput": "~0.7.1",
+    "font-awesome": "fontawesome#~4.4.0",
+    "fullcalendar": "~3.0.1",
+    "highlight": "~8.8.0",
+    "leaflet": "~0.7.5",
+    "moment": "~2.17.0",
+    "slimScroll": "jquery-slimscroll#~1.3.6",
+    "angular-progress-button-styles": "~0.1.0",
+    "angular-ui-router": "~0.3.2",
+    "angular-chart.js": "~1.0.3",
+    "angular-chartist.js": "~3.3.12",
+    "chartist": "0.9.5",
+    "angular-morris-chart": "~1.1.0",
+    "ionrangeslider": "2.1.4",
+    "angular-bootstrap": "~1.3.3",
+    "angular-animate": "~1.5.8",
+    "angular-sanitize": "1.5.8",
+    "textAngular": "~1.4.6",
+    "angular-xeditable": "~0.5.0",
+    "ng-js-tree": "^0.0.10",
+    "angular-ui-select": "^0.19.6",
+    "angular-bootstrap-datetimepicker-directive": "^0.1.3",
+    "angular-resource": "1.5.11",
+    "angular-base64-upload": "^0.1.19",
+    "angular-utf8-base64": "^0.0.5",
+    "angular-cookies": "1.5.8",
+    "angular-base64": "^2.0.5",
+    "swagger-ui": "2.1.5",
+    "ngstorage": "^0.3.11",
+    "angular-translate": "^2.15.1",
+    "angular-dynamic-locale": "^0.1.32",
+    "angular-translate-loader-partial": "^2.15.1",
+    "angular-translate-interpolation-messageformat": "^2.15.1",
+    "angular-translate-storage-cookie": "^2.15.1",
+    "angular-cache-buster": "^0.4.3",
+    "ng-file-upload": "^12.2.13",
+    "ngInfiniteScroll": "^1.3.4",
+    "angular-eonasdan-datetimepicker": "^0.3.9",
+    "angular-tree-dnd": "^3.0.4",
+    "jqwidgets": "^4.6.1",
+    "angular-bootstrap-grid-tree": "^0.4.0",
+    "ngBootbox": "^0.2.0"
   },
-  "private": true,
+  "resolutions": {
+    "angular": "~1.5.9",
+    "jquery": "~3.1.1"
+  },
   "overrides": {
+    "amcharts": {
+      "main": [
+        "./dist/amcharts/amcharts.js",
+        "./dist/amcharts/plugins/responsive/responsive.min.js",
+        "./dist/amcharts/serial.js",
+        "./dist/amcharts/funnel.js",
+        "./dist/amcharts/pie.js",
+        "./dist/amcharts/gantt.js"
+      ]
+    },
+    "amcharts-stock": {
+      "main": "./dist/amcharts/amstock.js"
+    },
+    "ammap": {
+      "main": [
+        "./dist/ammap/ammap.js",
+        "./dist/ammap/maps/js/worldLow.js"
+      ]
+    },
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.css",
-        "dist/js/bootstrap.js"
+        "js/dropdown.js",
+        "js/modal.js",
+        "./dist/fonts/**.*"
       ]
     },
-    "bootstrap-material-design": {
-      "dependencies": {
-        "jquery": "~2.1.1",
-        "bootstrap": "~3.3.5"
-      }
+    "slimScroll": {
+      "main": "./jquery.slimscroll.js"
     },
-    "angular-http-auth": {
+    "angular-swagger-ui": {
       "dependencies": {
-        "angular": "~1.4"
-      }
+        "angular": "~1.4",
+        "angular-sanitize": "~1.4",
+        "bootstrap-less-only": "~3.3"
+      },
+      "main": [
+        "dist/scripts/swagger-ui.js",
+        "dist/css/swagger-ui.css"
+      ]
     },
-    "font-awesome" : {
+    "font-awesome": {
       "main": [
         "css/font-awesome.css",
         "fonts/FontAwesome.otf",
@@ -44,9 +134,58 @@
         "fonts/fontawesome-webfont.woff",
         "fonts/fontawesome-webfont.woff2"
       ]
+    },
+    "jqwidgets": {
+      "main": [
+        "jqwidgets/jqxcore.js",
+        "jqwidgets/jqxdata.js",
+	"jqwidgets/jqxdatatable.js",
+        "jqwidgets/jqxbuttons.js",
+        "jqwidgets/jqxbuttongroup.js",
+        "jqwidgets/jqxscrollbar.js",
+        "jqwidgets/jqxdropdownlist.js",
+        "jqwidgets/jqxmenu.js",
+        "jqwidgets/jqxgrid.js",
+        "jqwidgets/jqxdatatable.js",
+        "jqwidgets/jqxtreegrid.js",
+        "jqwidgets/jqxgrid.edit.js",
+        "jqwidgets/jqxgrid.pager.js",
+        "jqwidgets/jqxgrid.sort.js",
+        "jqwidgets/jqxgrid.filter.js",
+        "jqwidgets/jqxgrid.storage.js",
+        "jqwidgets/jqxdata.export.js",
+        "jqwidgets/jqxgrid.export.js",
+        "jqwidgets/jqxgrid.columnsresize.js",
+        "jqwidgets/jqxgrid.columnsreorder.js",
+        "jqwidgets/jqxgrid.selection.js",
+        "jqwidgets/jqxgrid.aggregates.js",
+        "jqwidgets/jqxgrid.grouping.js",
+        "jqwidgets/jqxpanel.js",
+        "jqwidgets/jqxcheckbox.js",
+        "jqwidgets/jqxtabs.js",
+        "jqwidgets/jqxlistbox.js",
+        "jqwidgets/jqxinput.js",
+        "jqwidgets/jqxformattedinput.js",
+        "jqwidgets/jqxmaskedinput.js",
+        "jqwidgets/jqxdate.js",
+        "jqwidgets/jqxdatetimeinput.js",
+        "jqwidgets/jqxcalendar.js",
+        "jqwidgets/jqxpasswordinput.js",
+        "jqwidgets/jqxvalidator.js",
+        "jqwidgets/jqxcombobox.js",
+        "jqwidgets/jqxcomplexinput.js",
+        "jqwidgets/jqxnumberinput.js",
+        "jqwidgets/jqxresponse.js",
+        "jqwidgets/jqxangular.js",
+        "jqwidgets/jqxwindow.js",
+        "jqwidgets/jqxdocking.js",
+        "jqwidgets/jqxdockinglayout.js",
+        "jqwidgets/jqxdockpanel.js",
+        "jqwidgets/styles/jqx.base.css",
+        "jqwidgets/styles/jqx.energyblue.css",
+        "jqwidgets/styles/jqx.ui-sunny.css",
+        "jqwidgets/globalization/globalize.js"
+      ]
     }
-  },
-  "resolutions": {
-    "angular": "1.4.8"
   }
 }

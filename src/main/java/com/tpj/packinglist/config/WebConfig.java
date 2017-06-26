@@ -63,14 +63,14 @@ public EmbeddedServletContainerFactory servletContainer() {
     return tomcatFactory;
 }
 
-//    @Bean
-//    public XmlViewResolver viewResolver() {
-//        XmlViewResolver vr = new XmlViewResolver();
-//        Resource resource = new ClassPathResource("jasper-views.xml");
-//        vr.setLocation(resource);
-//        vr.setOrder(1);
-//        return vr;
-//    }
+    @Bean
+    public XmlViewResolver viewResolver() {
+        XmlViewResolver vr = new XmlViewResolver();
+        Resource resource = new ClassPathResource("jasper-views.xml");
+        vr.setLocation(resource);
+        vr.setOrder(1);
+        return vr;
+    }
     
     @Bean
     public CorsFilter corsFilter() {

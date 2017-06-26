@@ -33,7 +33,7 @@ function browserSyncInit(baseDir, browser) {
    *
    * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.9.0/README.md
    */
-  var proxyRoutes = [
+   var proxyRoutes = [
         '/oauth',
         '/api',
         '/management',
@@ -41,8 +41,8 @@ function browserSyncInit(baseDir, browser) {
         '/v2/api-docs',
         '/h2-console'
     ];
-  // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', changeOrigin: true});
    server.middleware = proxyMiddleware(proxyRoutes, {target: 'http://localhost:8090', changeOrigin: true});
+  // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', changeOrigin: true});
 
   browserSync.instance = browserSync.init({
     startPath: '/',
