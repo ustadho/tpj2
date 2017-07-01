@@ -57,25 +57,25 @@
                             {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
                         </td>
                         <td>
-                            {{ c.nama || 'empty' }}
+                            {{ c.nama}}
                         </td>
                         <td>
-                            {{ c.kota || 'empty' }}
+                            {{ c.kota}}
                         </td>
                         <td>
-                            {{ c.alamat || 'empty' }}
+                            {{ c.alamat}}
                         </td>
                         <td>
-                            {{ c.kontak || 'empty' }}
+                            {{ c.kontak}}
                         </td>
                         <td>
-                            {{ c.telepon || 'empty' }}
+                            {{ c.telepon}}
                         </td>
                         <td>
                             <div class="buttons" >
                                 <button class="btn btn-primary editable-table-button btn-xs" 
-                                        data-toggle="modal" ng-click="edit(c)">Edit</button>
-                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
+                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/emkl/emkl-modal.html', 'md')">Ubah</button>
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data {{c.nama}}?" ng-confirm="hapus(c)">Hapus</button>
                             </div>
                         </td>
                     </tr>
@@ -84,8 +84,8 @@
                     <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
                     <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>
                 </div>
+                
             </div>
         </div>
     </div>
-</div>
 </div>

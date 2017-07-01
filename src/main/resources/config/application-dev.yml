@@ -26,12 +26,9 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-#        url: jdbc:postgresql://118.98.64.78:5432/alfatih
-#        username: postgres
-#        password: hi1924okok
         url: jdbc:postgresql://localhost:5432/tpj2
-        username: test
-        password: test
+        username: tpj
+        password: tpjBismillah2017
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL

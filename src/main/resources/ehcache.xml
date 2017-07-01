@@ -17,23 +17,23 @@
             overflowToDisk="false"
             />
 
-    <cache name="com.nls.domain.User"
+    <cache name="com.tpj.packinglist.domain.User"
            timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.nls.domain.Authority"
+    <cache name="com.tpj.packinglist.domain.Authority"
            timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.nls.domain.User.authorities"
+    <cache name="com.tpj.packinglist.domain.User.authorities"
            timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.nls.domain.PersistentToken"
+    <cache name="com.tpj.packinglist.domain.PersistentToken"
            timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.nls.domain.User.persistentTokens"
+    <cache name="com.tpj.packinglist.domain.User.persistentTokens"
            timeToLiveSeconds="3600">
     </cache>
     </ehcache>

@@ -61,6 +61,24 @@ public class ReportDao {
         System.out.println("jmlContainerPerTujuan: " + sql);
         return mr.mapList(sql);
     }
+    
+    public Object listBast(Integer idkb) {
+        String sql = "select distinct sj.id_merk, m.nama merk, t.nama toko, st.id_emkl, e.nama emkl, bast.nomor\n" +
+                    "from t_kapal_berangkat kb \n" +
+                    "inner join t_stuffing st on st.id_kapal_berangkat=kb.id \n" +
+                    "inner join m_kontainer kn on kn.id=st.id_kontainer\n" +
+                    "inner join m_emkl e on e.id=st.id_emkl\n" +
+                    "inner join m_satuan_kirim sk on sk.id=st.id_satuan_kirim\n" +
+                    "inner join t_sj_stuffing ss on ss.id_stuffing=st.id\n" +
+                    "inner join t_surat_jalan_detail sd on sd.id=ss.id_sj_detail\n" +
+                    "inner join t_surat_jalan sj on sj.id=sd.id_surat_jalan\n" +
+                    "inner join m_merk m on m.id=sj.id_merk\n" +
+                    "inner join m_toko t on t.id=m.id_toko\n" +
+                    "left join bast on bast.id_kapal_berangkat=kb.id and bast.id_merk=m.id and bast.id_emkl=e.id \n" +
+                    "where kb.id="+idkb+"\n" +
+                    "order by e.nama, m.nama";
+        return mr.mapList(sql);
+    }
 
     /**
      *
@@ -74,6 +92,20 @@ public class ReportDao {
      */
     public Object rekapColiKubikasiPerGrup(String grup, String tglMulai, String tglSampai, String order, int limit) {
         String sql = "select * from fn_rekap_by_grup('" + grup + "'," + (tglMulai == null ? "null" : "'" + tglMulai + "'") + "," + (tglSampai == null ? "null" : "'" + tglSampai + "'") + ",'" + order + "') as (grup varchar, coli bigint, kubikasi numeric) limit " + limit;
+        return mr.mapList(sql);
+    }
+
+    public Object bast(Integer idKapalBerangkat, Integer idMerk, Integer idEmkl) {
+        String sql="select * From fn_rpt_bast("+idKapalBerangkat+", "+idMerk+", "+idEmkl+") as (nomor varchar, kota_tujuan varchar, kondisi varchar, \n" +
+                    "kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar, \n" +
+                    "id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision, \n" +
+                    "t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume double precision, total_coli_sj text, pisah boolean, satuan_kirim varchar, \n" +
+                    "jml_kontainer bigint, head_note text, claim_note text)";
+        return mr.mapList(sql);
+    }
+
+    public Object rekapMerk(Integer id) {
+        String sql="select * from fn_pl_rpt_rekap_merk_per_stuffing("+id+")as (no_kontainer varchar, kapal text, emkl varchar, merk varchar, coli bigint)";
         return mr.mapList(sql);
     }
 }

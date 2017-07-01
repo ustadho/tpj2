@@ -14,6 +14,7 @@
                     <tr>
                         <td></td>
                         <td>Nama Kota</td>
+                        <td>Kode</td>
                         <td>
                             <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
                         </td>
@@ -22,14 +23,13 @@
                         <td>
                             {{((paging.currentPage-1)*paging.maxSize)+$index + 1}}
                         </td>
-                        <td>
-                            {{ c.nama || 'empty' }}
-                        </td>
+                        <td>{{ c.nama}}</td>
+                        <td>{{ c.kodeNota}}</td>
                         <td>
                             <div class="buttons" >
                                 <button class="btn btn-primary editable-table-button btn-xs" 
-                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/kota/kota-modal.html', 'md')">Edit</button>
-                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Kota {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
+                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/kota/kota-modal.html', 'md')">Ubah</button>
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Kota {{c.nama}}?" ng-confirm="hapus(c)">Hapus</button>
                             </div>
                         </td>
                     </tr>

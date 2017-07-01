@@ -30,7 +30,7 @@
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/item/item.html',
-                            controller: 'ItemCtrl'
+                            controller: 'ItemController'
                         }
                     },
                     title: 'Item',
@@ -168,12 +168,10 @@
                 })
                 .state('master.kapalBerangkat', {
                     url: '/kapalBerangkat',
-                    templateUrl: 'app/pages/master/kapalBerangkat/kapal-berangkat.html',
-//                    controller: 'KapalBerangkatCtrl',
                     views: {
                         'content@': {
                             url: '/kapalBerangkat',
-                            templateUrl: 'app/pages/master/kapalBerangkat/kapal-berangkat.html'
+                            templateUrl: 'app/pages/master/kapal-berangkat/kapal-berangkat.html'
                         }
                     },
 //          controllerAs: 'vm',

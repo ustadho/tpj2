@@ -5,18 +5,19 @@
  */
 package com.tpj.packinglist.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -47,12 +48,16 @@ public class Toko {
     @Column
     private String telepon;
 
+    @Column
+    private String hp;
+
     @ManyToOne
     @JoinColumn(name = "id_kota")
     private Kota kota;
 
-    @OneToMany(mappedBy = "toko", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true)
-    @JsonManagedReference
+    @OrderBy(value="nama")
+    @OneToMany(mappedBy = "toko", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference 
     private List<Merk> listMerk = new ArrayList<>();
 
     @Column(columnDefinition = "boolean default true", nullable = false)
@@ -112,6 +117,14 @@ public class Toko {
 
     public void setTelepon(String telepon) {
         this.telepon = telepon;
+    }
+
+    public String getHp() {
+        return hp;
+    }
+
+    public void setHp(String hp) {
+        this.hp = hp;
     }
 
     public Boolean getAktif() {

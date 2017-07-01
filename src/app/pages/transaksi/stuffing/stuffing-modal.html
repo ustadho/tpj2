@@ -1,0 +1,146 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="form1" id="form1">
+            <div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="tglClosing">Closing</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.tglBerangkat.$invalid}">
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="dateOptions" ng-model="vm.tglClosing" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="dd/MM/yyyy" show-button-bar="false" name="tglClosing" required="true" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDate()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="kontainer">Kontainer</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.kontainer.$invalid}">
+                        <ui-select ng-model="vm.kontainer"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true" ng-required="true">
+                            <ui-select-match placeholder="Pilih Kontainer">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listKontainer | filter: $select.search">
+                                <span ng-bind-html="item.nomor"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kontainer.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="kota">Tujuan</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.kota.$invalid}">
+                        <ui-select ng-model="vm.kota"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Kota">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listKota | filter: $select.search">
+                                <span ng-bind-html="item.nama"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="kapalBerangkat">Kapal Berangkat</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.kapal.$invalid}">
+                        <ui-select ng-model="vm.kapalBerangkat" name="kapalBerangkat"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Kapal Berangkat">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listKapalBerangkat | filter: $select.search">
+                                <span ng-bind-html="item.kapal.nama"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kapalBerangkat.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="emkl">EMKL</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.emkl.$invalid}">
+                        <ui-select ng-model="vm.emkl"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih EMKL">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listEmkl | filter: $select.search">
+                                <span ng-bind-html="item.nama"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.emkl.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="satuanKirim">Satuan Kirim</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.satuanKirim.$invalid}">
+                        <ui-select ng-model="vm.satuanKirim"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Satuan Kirim">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listSatuanKirim | filter: $select.search">
+                                <span ng-bind-html="item.nama"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.satuanKirim.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="simpan()" ng-disabled="form1.$invalid">Simpan</button>
+        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+    </div>
+</div>

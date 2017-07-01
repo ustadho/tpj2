@@ -19,5 +19,9 @@
           p:url="/WEB-INF/templates/jrxml/per-toko.jrxml"/>
     <bean id="api/report/jml-container-pertujuan" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/jml-container-pertujuan.jrxml"/>
+    <bean id="api/report/bast" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+          p:url="/WEB-INF/templates/jrxml/bast.jrxml"/>
+    <bean id="api/report/rekap-merk" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+          p:url="/WEB-INF/templates/jrxml/rekap-kontainer-merk.jrxml"/>
 
 </beans>

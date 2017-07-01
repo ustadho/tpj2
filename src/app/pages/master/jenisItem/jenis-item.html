@@ -1,5 +1,6 @@
 <div class="widgets">
-
+    <h2>Master Jenis Item</h2>
+    <jhi-alert></jhi-alert>
     <div class="row">
         <div class="col-md-12">
             <div class=" form-group input-group">
@@ -20,16 +21,16 @@
                     </tr>
                     <tr ng-repeat="c in dataPage.content" class="editable-row">
                         <td>
-                            {{((paging.currentPage-1)*paging.maxSize)+$index + 1}}
+                            {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
                         </td>
                         <td>
-                            {{ c.nama || 'empty' }}
+                            {{ c.nama}}
                         </td>
                         <td>
                             <div class="buttons" >
                                 <button class="btn btn-primary editable-table-button btn-xs" 
-                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/jenisItem/jenis-item-modal.html', 'md')">Edit</button>
-                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Jenis Item {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
+                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/jenisItem/jenis-item-modal.html', 'md')">Ubah</button>
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Jenis Item {{c.nama}}?" ng-confirm="hapus(c)">Hapus</button>
                             </div>
                         </td>
                     </tr>

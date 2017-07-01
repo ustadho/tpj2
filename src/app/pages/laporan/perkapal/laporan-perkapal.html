@@ -1,0 +1,122 @@
+<div class="widgets">
+    <h1>Packing List</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div
+                ba-panel
+                ba-panel-title="Per Kapal">
+                <form class="form-horizontal" id="form1">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label class="control-label" for="kota">Kota</label>
+                        </div>
+                        <div class="col-md-8" ng-class="{error: form1.kota.$invalid}">
+                            <ui-select ng-model="kota.selected"
+                                       class="btn-group bootstrap-select form-control"
+                                       ng-disabled="false"
+                                       append-to-body="true"
+                                       search-enabled="true" id="kota">
+                                <ui-select-match placeholder="Pilih Kota">
+                                    {{$select.selected.nama}}
+                                </ui-select-match>
+                                <ui-select-choices
+                                    repeat="item in listKota | filter: $select.search">
+                                    <span ng-bind-html="item.nama"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
+                                Silahkan pilih kota tujuan
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-show="kota.selected != null" >
+                        <div class="col-md-2">
+                            <label class="control-label" for="kota">Kapal</label>
+                        </div>
+                        <div class="col-md-8" ng-class="{error: form1.kapal.$invalid}">
+                            <ui-select ng-model="kapal.selected"
+                                       class="btn-group bootstrap-select form-control"
+                                       ng-disabled="false"
+                                       append-to-body="true"
+                                       search-enabled="true">
+                                <ui-select-match placeholder="Pilih Kapal">
+                                    {{$select.selected.kapal.nama}}  ,Tgl Brkt {{$select.selected.tglBerangkat| date:'dd-MM-yy'}}
+                                </ui-select-match>
+                                <ui-select-choices
+                                    repeat="item in listKapal | filter: $select.search">
+                                    <div ng-bind-html="item.kapal.nama"></div>
+                                    <small>
+                                        Tgl. Brkt: {{item.tglBerangkat| date:'dd-MM-yy'}}
+                                    </small>
+                                </ui-select-choices>
+                            </ui-select>
+                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
+                                Silahkan pilih Kapal
+                            </span>
+                        </div>
+                    </div>
+                    <div ng-show="listKontainer.length > 0">
+                        <table class="table table-bordered table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tgl Closing</th>
+                                    <th>Kontainer</th>
+                                    <th>Tujuan</th>
+                                    <th>Emkl</th>
+                                    <th>Satuan Kirim</th>
+                                    <th>Cetak</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="c in listKontainer" class="editable-row">
+                                <td>
+                                    {{$index + 1}}
+                                </td>
+                                <td>
+                                    {{ c.tglClosing | date: 'dd/MM/yyyy' }}
+                                </td>
+                                <td>
+                                    {{ c.nomor_kontainer}}
+                                </td>
+                                <td>
+                                    {{ c.kota_tujuan}}
+                                </td>
+                                <td>
+                                    {{ c.nama_emkl}}
+                                </td>
+                                <td>
+                                    {{ c.satuan_kirim}}
+                                </td>                                
+                                <td>
+                                    <div class="butons">
+                                        <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                            <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
+                                                P List <span class="caret"></span>
+                                            </button>
+                                            <ul uib-dropdown-menu>
+                                                <li><a href ng-click="cetak(c, false, 'pdf')">PDF</a></li>
+                                                <li><a href ng-click="cetak(c, false, 'xlsx')">XLS</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                            <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
+                                                Expedisi<span class="caret"></span>
+                                            </button>
+                                            <ul uib-dropdown-menu>
+                                                <li><a href ng-click="cetak(c, true, 'pdf')">PDF</a></li>
+                                                <li><a href ng-click="cetak(c, true, 'xlsx')">XLS</a></li>
+                                            </ul>
+                                        </div>
+                                        <!--                                <button class="btn btn-default editable-table-button btn-xs" ng-click="cetak(c, false)">P List</button>-->
+                                        <!--<button class="btn btn-default editable-table-button btn-xs" ng-click="cetak(c, true)">Expedisi</button>-->
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

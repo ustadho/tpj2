@@ -1,0 +1,92 @@
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+    <div ba-panel ba-panel-title="Histori Surat Jalan">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <label class="control-label" for="tgl1">Tgl Brgkt Awal</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <div class="input-group">
+                            <input class="form-control" datetimepicker ng-model="options.tgl1" options="optionsTgl" name="tgl1"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tgl1.$error.required">
+                                Harus Diisi
+                            </span>                        
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="control-label" for="tgl2">Tgl Brgkt Akhir</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <div class="input-group">
+                            <input class="form-control" datetimepicker ng-model="options.tgl2" options="optionsTgl" name="tgl2"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tgl2.$error.required">
+                                Harus Diisi
+                            </span>                        
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <label class="control-label" for="grup">Grup Berdasarkan</label>
+                    </div>
+                    <div class="col-sm-3" ng-class="{error: form1.grup.$invalid}">
+                        <p class="input-group">
+                        <ui-select ng-model="options.grup"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Kota">
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listGrup | filter: $select.search">
+                                <span ng-bind-html="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="control-label" for="order">Urut Berdasarkan</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <p class="input-group">
+                        <ui-select ng-model="options.order"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Kota">
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listOrder | filter: $select.search">
+                                <span ng-bind-html="item.name"></span>
+                            </ui-select-choices>                        
+                        </ui-select>                        
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="grupColiKubikasiChart" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+</div>

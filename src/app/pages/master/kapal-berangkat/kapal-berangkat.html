@@ -113,13 +113,13 @@
                                                 {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
                                             </td>
                                             <td>
-                                                {{ c.kapal || 'empty' }}
+                                                {{ c.kapal}}
                                             </td>
                                             <td>
                                                 {{ c.tgl_berangkat|date:'dd/MM/yyyy'}}
                                             </td>
                                             <td>
-                                                {{ c.kota || 'empty' }}
+                                                {{ c.kota}}
                                             </td>
                                             <td>
                                                 <i class="ion-checkmark-round" ng-show="c.aktif"></i>
@@ -127,8 +127,8 @@
                                             <td>
                                                 <div class="buttons" >
                                                     <button class="btn btn-primary editable-table-button btn-xs" 
-                                                            data-toggle="modal" ng-click="edit(c)">Edit</button>
-                                                    <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
+                                                            data-toggle="modal" ng-click="edit(c)">Ubah</button>
+                                                    <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data {{c.nama}}?" ng-confirm="hapus(c)">Hapus</button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -143,90 +143,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12"  ng-show="modalTitle !== ''">
-                <div ba-panel ba-panel-title="{{modalTitle}}" >
-                    <div class="row">
-                        <form class="form-horizontal" name="form1">
-                            <div class="form-group">
-                                <div class="col-xs-3">
-                                    <label class="control-label" for="tglBerangkat">Berangkat</label>
-                                </div>
-                                <div class="col-sm-8" >
-                                    <p class="input-group">
-                                        <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="dateOptions" ng-model="vm.tglBerangkat" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="dd/MM/yyyy" show-button-bar="false" name="tglBerangkat" />
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="openDate()"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>                    
-                            <div class="form-group">
-                                <div class="col-xs-3">
-                                    <label class="control-label" for="kota">Tujuan</label>
-                                </div>
-                                <div class="col-sm-8" ng-class="{error: form1.kota.$invalid}">
-                                    <ui-select ng-model="vm.kota"
-                                               class="btn-group bootstrap-select form-control"
-                                               ng-disabled="false"
-                                               append-to-body="true"
-                                               search-enabled="true">
-                                        <ui-select-match placeholder="Pilih Kota">
-                                            {{$select.selected.nama}}
-                                        </ui-select-match>
-                                        <ui-select-choices
-                                            repeat="item in listKota | filter: $select.search">
-                                            <span ng-bind-html="item.nama"></span>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
-                                        Harus Diisi
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-3">
-                                    <label class="control-label" for="kapal">Kapal</label>
-                                </div>
-                                <div class="col-sm-8" ng-class="{error: form1.kapal.$invalid}">
-                                    <ui-select ng-model="vm.kapal" name="kapal"
-                                               class="btn-group bootstrap-select form-control"
-                                               ng-disabled="false"
-                                               append-to-body="true"
-                                               search-enabled="true">
-                                        <ui-select-match placeholder="Pilih Kapal">
-                                            {{$select.selected.nama}}
-                                        </ui-select-match>
-                                        <ui-select-choices
-                                            repeat="item in listKapal | filter: $select.search">
-                                            <span ng-bind-html="item.nama"></span>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kapal.$error.required">
-                                        Harus Diisi
-                                    </span>
-                                </div>
-                            </div>                                        
-                            <div class="form-group">
-                                <div class="col-xs-3">
-                                    <label class="control-label" for="aktif">Aktif</label>
-                                </div>
-                                <div class="col-sm-8" ng-class="{error: form1.aktif.$invalid}">
-                                    <ba-switcher switcher-style="primary" switcher-value="vm.aktif"></ba-switcher>
-                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.aktif.$error.required">
-                                        Harus Diisi
-                                    </span>
-                                </div>
-                            </div>                                        
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-9">
-                                    <button type="button" class="btn btn-primary" ng-click="simpan()" ng-disabled="form1.$invalid">Simpan</button>
-                                    <button type="button" class="btn btn-danger" ng-click="clear()">Batal</button>
-                                </div>
-                            </div>
-                        </form>                
-                    </div>                    
-                </div>                    
-            </div>            
         </div>
     </div>
 </div>

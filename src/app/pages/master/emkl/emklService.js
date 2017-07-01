@@ -33,7 +33,7 @@
         ;
 
         function simpan(data, ori) {
-            if (ori.id == null || ori.id == undefined) {
+            if (ori==null || ori.id == undefined || ori.id == null ) {
                 return $http.post(url, data)
             } else {
                 return $http.put(url + '/' + ori.id, data)

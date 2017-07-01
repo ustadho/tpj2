@@ -1,0 +1,50 @@
+<div class="modal-content ng-cloak">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="form1" id="form1">
+            <table class="table table-bordered table-hover table-condensed">
+                <tr>
+                    <td></td>
+                    <td>Tgl Berangkat</td>
+                    <td>Kapal</td>
+                    <td>Kontainer</td>
+                    <td>Coli</td>
+                    <td>
+                        <button class="btn btn-info editable-table-button btn-xs" ng-click="tambah()">Tambah</button>
+                    </td>
+                </tr>
+                <tr ng-repeat="c in sjDetail.sjStufings" class="editable-row">
+                    <td>
+                        {{$index + 1}}
+                    </td>
+                    <td>
+                        {{ c.stuffing.kapalBerangkat.tglBerangkat | date:'dd/MM/yyyy'}}
+                    </td>
+                    <td>
+                        {{ c.stuffing.kapalBerangkat.kapal.nama}}
+                    </td>
+                    <td>
+                        {{  c.stuffing.kontainer.nomor}}
+                    </td>
+                    <td><input name="coli" type="number" class="form-control" id="nama" ng-model="c.coli" min="1"/></td>
+                    <td>
+                        <div class="buttons" >
+<!--                            <button class="btn btn-primary editable-table-button btn-xs" 
+                                    data-toggle="modal" ng-click="edit($index)" ng-hide="$index === 0">Ubah</button>-->
+                            <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data ini?" ng-confirm="hapus($index)" >Hapus</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>            
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="simpan()"> OK </button>
+        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+    </div>
+</div>

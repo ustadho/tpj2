@@ -1,0 +1,129 @@
+<div class="modal-content ng-cloak">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="form1" id="form1">
+            <div>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label class="control-label" for="nama">COLI</label>
+                    </div>
+                    <div class="col-sm-3" ng-class="{error: form1.coli.$invalid}">
+                        <input name="coli" type="number" class="form-control" id="coli" ng-model="vm.coli" required autofocus/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.coli.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="checkbox-inline custom-checkbox nowrap">
+                            <input type="checkbox" id="chkPaket" ng-model="vm.paket">
+                            <span>Paket</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="item">Jenis Barang</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control with-success-addon" ng-model="vm.item.nama" ng-enter="lookupItem()">
+                            <span class="input-group-btn">
+                                <button class="btn input-group-addon-success" type="button" ng-click="lookupItem()" ng-disabled="vm.item.nama === '' || vm.item.nama === null || vm.item.nama === 'undefined'">Cari</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="vm.paket">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="item"></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-3" style="text-align: center">
+                            P
+                        </div>
+                        <div class="col-sm-3" style="text-align: center">
+                            L
+                        </div>
+                        <div class="col-sm-3" style="text-align: center">
+                            T
+                        </div>
+                        <div class="col-sm-3" style="text-align: center">
+                            Sub Total
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-hide="vm.paket">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="item">Ukuran</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <!--<label for="panjang">P</label>-->
+                                <input type="number" class="form-control" id="panjang" placeholder="Panjang" ng-model="vm.p">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <!--<label for="lebar">L</label>-->
+                                <input type="number" class="form-control" id="lebar" placeholder="Lebar" ng-model="vm.l">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <!--<label for="tinggi">T</label>-->
+                                <input type="number" class="form-control" id="tinggi" placeholder="Tinggi" ng-model="vm.t">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <!--<label for="subTotal">Sub M3/Ton</label>-->
+                                <input type="number" class="form-control" id="subTotal" placeholder="Sub Total" ng-model="subTotal" ng-disabled="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-hide="vm.paket">
+                    <div class="col-sm-3">
+                        <label class="control-label" for="item">Tot M3/TON</label>
+                    </div>
+                    <div class="col-sm-3" ng-class="{error: form1.totKubikasi.$invalid}">
+                        <input name="totKubikasi" type="number" class="form-control" id="totKubikasi" ng-model="totKubikasi" ng-disabled="!vm.fixVolume"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="checkbox-inline custom-checkbox nowrap">
+                            <input type="checkbox" id="inlineCheckbox02" ng-model="vm.fixVolume">
+                            <span>Fix Volume</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label class="control-label" for="item">Deskripsi</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <textarea class="form-control"  rows="7" ng-model="vm.spesifikasi"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label class="control-label" for="catatan">Catatan</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <textarea class="form-control"  rows="3" ng-model="vm.catatan"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="tambahkan()"> OK </button>
+        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+    </div>
+</div>

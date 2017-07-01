@@ -5,8 +5,7 @@
  */
 package com.tpj.packinglist.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import java.util.Date;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
@@ -24,7 +23,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "m_item")
-public class Item {
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class Item extends AbstractAuditingEntity implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -24,6 +24,8 @@
                 'ngCacheBuster',
             ])
             .run(run)
+            .directive('ngEnter', ngEnter)
+            .directive('whenScrolled', whenScrolled)
             .directive('ngConfirm', ['$uibModal', function ($uibModal) {
                     return {
                         restrict: 'A',
@@ -78,5 +80,29 @@
 
     function run(stateHandler) {
         stateHandler.initialize();
+    }
+    
+    function ngEnter() {
+        return function (scope, element, attrs) {
+            element.bind("keydown keypress", function (event) {
+                if (event.which === 13) {
+                    scope.$apply(function () {
+                        scope.$eval(attrs.ngEnter);
+                    });
+
+                    event.preventDefault();
+                }
+            });
+        }
+    }
+    function whenScrolled() {
+        return function (scope, elm, attr) {
+            var raw = elm[0];
+            elm.bind('scroll', function () {
+                if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                    scope.$apply(attr.whenScrolled);
+                }
+            });
+        };
     }
 })();

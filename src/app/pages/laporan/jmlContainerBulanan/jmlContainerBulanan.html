@@ -1,0 +1,47 @@
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+    <div ba-panel ba-panel-title="Jumlah Container Bulanan">
+        <form id="form1" name="form1">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <label class="control-label" for="tahun">Tahun</label>
+                        </div>
+                        <div class="col-sm-3" >
+                            <div class="input-group">
+                                <input class="form-control" ng-model="vm.tahun" options="options" name="tahun" type="number" required/>
+                                <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tahun.$error.required">
+                                    Harus Diisi
+                                </span>                        
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <label class="control-label" for="bulan">Bulan</label>
+                        </div>
+                        <div class="col-sm-3" >
+                            <div class="input-group">
+                                <select name="bulan" id="bulan" class="form-control" 
+                                        ng-options="option.name for option in listBulan track by option.value"
+                                        ng-model="vm.bulan"></select>
+                                <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.bulan.$error.required">
+                                    Harus Diisi
+                                </span>                        
+                            </div>                        
+                        </div>
+                        <div class="col-sm-4" >
+                            <button class="btn btn-primary btn-md" ng-click="cetak('pdf')"> Cetak </button>
+                            <button class="btn btn-primary btn-md" ng-click="cetak('xlsx')"> Xls </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>        
+        <hr>
+    </div>
+</div>

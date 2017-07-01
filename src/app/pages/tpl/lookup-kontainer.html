@@ -1,0 +1,47 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Lookup Kontainer</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12 input-group custom-search-form wrapper">
+            <input type="text" class="form-control" id="cari" name="cari" ng-model="cari" placeholder="Pencarian ..." autofocus="true" ng-keypress="$event.keyCode == 13 ? reloadData() : undefined">
+        </div>
+        <div class="well-large">
+            <div class="box-content">
+                <div when-scrolled="loadMore()" style="height: 360px; overflow: scroll;" >
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tr>
+                            <td></td>
+                            <td>Nomor Kontainer</td>
+                            <td>
+                                <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="c in dataPage.content" class="editable-row" ng-click="pilih(c)">
+                            <td>
+                                {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
+                            </td>
+                            <td>
+                                {{ c.nomor}}
+                            </td>
+                            <td>
+                                <div class="buttons" >
+                                    <button class="btn btn-primary editable-table-button btn-xs" 
+                                            data-toggle="modal" ng-click="edit(c, 'app/pages/master/kontainer/kontainer-modal.html', 'md')">Ubah</button>
+                                    <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Kontainer {{c.nomor}}?" ng-confirm="hapus(c)">Hapus</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div align="center" ng-show="dataPage.totalPages > 1">
+                        <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                        <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

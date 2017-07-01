@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2017-04-15T10:38:01 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="packing-list" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="76" uuid="b8b76c8b-a069-48df-acd7-9c0db1840a9f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="net.sf.jasperreports.default.font.name" value="DejaVu Sans"/>
@@ -8,13 +6,12 @@
 	<property name="net.sf.jasperreports.default.pdf.font.name" value="DejaVu Sans"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="tpj"/>
 	<property name="com.jaspersoft.studio.unit." value="mm"/>
 	<parameter name="lapExpedisi" class="java.lang.Boolean"/>
 	<parameter name="realPath" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select * from fn_jml_container_per_tujuan(2017, 4) as (jml_container bigint, id_kota int, kota varchar, tahun int, bulan varchar)
-]]>
+		<![CDATA[select * from fn_jml_container_per_tujuan(2017, 4) as (jml_container bigint, id_kota int, kota varchar, tahun int, bulan varchar)]]>
 	</queryString>
 	<field name="jml_container" class="java.lang.Long"/>
 	<field name="id_kota" class="java.lang.Integer"/>
@@ -40,13 +37,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA["Jumlah Container \nBulan "+$F{bulan}+" Tahun "+$F{tahun}]]></textFieldExpression>
 			</textField>
-			<image onErrorType="Blank">
-				<reportElement x="1" y="1" width="50" height="56" uuid="e1b7a31d-62e0-4595-86b0-1a3c5129d643">
-					<property name="com.jaspersoft.studio.unit.x" value="cm"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-				</reportElement>
-				<imageExpression><![CDATA[$P{realPath}+"logo-nls.png"]]></imageExpression>
-			</image>
 			<textField evaluationTime="Report">
 				<reportElement x="309" y="1" width="90" height="12" uuid="18953d29-4896-492b-91dc-10110f3c0373"/>
 				<textElement>
@@ -85,7 +75,7 @@
 	<columnHeader>
 		<band height="16" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="51" height="16" backcolor="#FFEF5E" uuid="7f9d2882-45c1-4459-b170-7e488ecb6058">
+				<reportElement mode="Opaque" x="0" y="0" width="51" height="16" uuid="7f9d2882-45c1-4459-b170-7e488ecb6058">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -99,7 +89,7 @@
 				<text><![CDATA[NO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="51" y="0" width="317" height="16" backcolor="#FFEF5E" uuid="c3f23819-32de-459d-b69b-68e2e7a038c8">
+				<reportElement mode="Opaque" x="51" y="0" width="317" height="16" uuid="c3f23819-32de-459d-b69b-68e2e7a038c8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -113,7 +103,7 @@
 				<text><![CDATA[KOTA TUJUAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="368" y="0" width="203" height="16" backcolor="#FFEF5E" uuid="c38feaad-a393-4531-8476-71f7d8d7b522">
+				<reportElement mode="Opaque" x="368" y="0" width="203" height="16" uuid="c38feaad-a393-4531-8476-71f7d8d7b522">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>

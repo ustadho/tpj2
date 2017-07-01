@@ -223,12 +223,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang.version}</version>
         </dependency>
-        <!-- apache -->
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-            <version>5.4.0</version>
-        </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
@@ -402,7 +396,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-fonts</artifactId>
-            <version>4.0.0</version>
+            <version>6.0.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -584,5 +578,3 @@
         </profile>
     </profiles>
 </project>
-
-

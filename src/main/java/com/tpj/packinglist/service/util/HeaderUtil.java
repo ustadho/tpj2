@@ -16,8 +16,8 @@ public final class HeaderUtil {
 
     public static HttpHeaders createAlert(String message, String param) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-alfatihApp-alert", message);
-        headers.add("X-alfatihApp-params", param);
+        headers.add("X-tpjApp-alert", message);
+        headers.add("X-tpjApp-params", param);
         return headers;
     }
 

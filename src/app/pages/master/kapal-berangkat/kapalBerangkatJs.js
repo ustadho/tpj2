@@ -15,10 +15,9 @@
             currentPage: 1,
             totalItems: 0
         };
-        $scope.opened = false;
         $scope.openedAwal = false;
-        $scope.openedAkhir = false;        
-        $scope.dateOptions = {format: 'DD/MM/YYYY', showClear: false};        
+        $scope.openedAkhir = false;
+        $scope.dateOptions = {format: 'DD/MM/YYYY', showClear: false};
         $scope.vm = {};
         $scope.ori = {};
         $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), kota: null, kapal: null, cari: ""};
@@ -50,21 +49,43 @@
         $scope.clear();
 
         $scope.baru = function () {
-            $scope.modalTitle = "Tambah KapalBerangkat";
-            $scope.vm = {};
-            $scope.ori = {};
             console.log('Baru');
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/master/kapal-berangkat/kapal-berangkat-modal.html',
+                controller: 'KapalBerangkatModalController',
+                size: 'md',
+                resolve: {
+                    data: function () {
+                        return {};
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.reloadData();
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
         };
 
         $scope.edit = function (x) {
-            $scope.ori = angular.copy(x);
-            $scope.modalTitle = "Edit KapalBerangkat";
-            console.log('edit', x);
-            KapalBerangkatService.cariSatu("kode", x.id).success(function (data) {
-                if (data.tglBerangkat != null && data.tglBerangkat != undefined) {
-                    data.tglBerangkat = new Date(data.tglBerangkat);
+            console.log('Open modal');
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/master/kapal-berangkat/kapal-berangkat-modal.html',
+                controller: 'KapalBerangkatModalController',
+                size: 'md',
+                resolve: {
+                    data: ['KapalBerangkatService', function (KapalBerangkatService) {
+                            var d = KapalBerangkatService.cariSatu('id', x.id);
+                            return d;
+                        }]
                 }
-                $scope.vm = angular.copy(data);
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.reloadData();
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
             });
         };
 
@@ -83,18 +104,30 @@
         };
     }
 
-    function KapalBerangkatModalController($uibModalInstance, toastr, $scope, KapalBerangkatService, data) {
-        $scope.ori = angular.copy(data);
+    function KapalBerangkatModalController($uibModalInstance, toastr, $scope, KapalBerangkatService, data, KotaService, KapalService) {
+        $scope.ori = angular.copy(data.data);
         $scope.modalTitle = "Edit KapalBerangkat";
         console.log('edit', data);
-        $scope.vm = angular.copy(data);
+        $scope.vm = angular.copy(data.data);
+        $scope.dateOptions = {format: 'DD/MM/YYYY', showClear: false};
+        $scope.opened = false;
 
+        KotaService.cariSemua().success(function (data) {
+            $scope.listKota = data;
+        });
 
+        KapalService.cariSemua().success(function (data) {
+            $scope.listKapal = data;
+        });
         $scope.simpan = function () {
             KapalBerangkatService.simpan($scope.vm, $scope.ori).success(function (d) {
                 $uibModalInstance.close($scope.vm);
                 toastr.success('Simpan data sukses!');
             })
+        }
+
+        $scope.batal = function () {
+            $uibModalInstance.close();
         }
     }
 })();

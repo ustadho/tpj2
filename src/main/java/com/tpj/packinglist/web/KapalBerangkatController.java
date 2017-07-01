@@ -69,7 +69,7 @@ public class KapalBerangkatController {
 
     @RequestMapping(value = "{column}/{value}", method = RequestMethod.GET)
     public KapalBerangkat cariSatu(@PathVariable String column, @PathVariable String value) {
-        if (column.equalsIgnoreCase("kode")) {
+        if (column.equalsIgnoreCase("id")) {
             return dao.findOne(Integer.valueOf(value));
         } else {
             throw new InvalidParameterException("column '" + column + "' not available");

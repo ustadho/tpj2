@@ -1,0 +1,121 @@
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Riwayat Surat Jalan</h2>
+            <jhi-alert></jhi-alert>
+        </div>
+    </div>
+    <div ba-panel ba-panel-title="Riwayat Surat Jalan">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        <label class="control-label" for="tglAwal">Dari</label>
+                    </div>
+                    <div class="col-md-2" >
+                        <div class="input-group">
+                            <input class="form-control" datetimepicker ng-model="vm.tglAwal" options="options" name="tglAwal"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tglAwal.$error.required">
+                                Harus Diisi
+                            </span>                        
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label class="control-label" for="tglAkhir">S/D</label>
+                    </div>
+                    <div class="col-md-2" >
+                        <div class="input-group">
+                            <input class="form-control" datetimepicker ng-model="vm.tglAkhir" options="options" name="tglAkhir"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tglAkhir.$error.required">
+                                Harus Diisi
+                            </span>                        
+                        </div>                        
+                    </div>
+                    <div class="col-md-1">
+                        <label class="control-label" for="kota">Kota</label>
+                    </div>
+                    <div class="col-md-3" ng-class="{error: form1.kota.$invalid}">
+                        <p class="input-group">
+                        <ui-select ng-model="vm.kota"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Kota">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listKota | filter: $select.search">
+                                <span ng-bind-html="item.nama"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.kota = {};"><i class="glyphicon glyphicon-remove"></i></button>
+                        </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-9">
+                        <div class=" form-group input-group">
+                        <input id="search" type="text" class="col-xs-2 form-control" ng-model="vm.cari" ng-keypress="$event.keyCode == 13 ? reloadData() : undefined"placeholder="Masukkan pencarian" autofocus>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button" ng-click="reloadData()"><i class="glyphicon"></i> Tampilkan
+                                                        </button>
+                                                    </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <table class="table table-bordered table-hover table-condensed">
+            <tr>
+                <td></td>
+                <td>Tanggal</td>
+                <td>Merk</td>
+                <td>Toko</td>
+                <td>Pengirim</td>
+                <td>Kontainer</td>
+                <td>
+                    <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
+                </td>
+            </tr>
+            <tr ng-repeat="c in dataPage.content" class="editable-row">
+                <td>
+                    {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
+                </td>
+                <td>
+                    {{ c.tanggal | date:'dd-MM-yy' }}
+                </td>
+                <td>{{ c.merk}}</td>
+                <td>{{c.toko_tujuan}}</td>
+                <td>{{c.pengirim}}</td>
+                <td>{{c.no_kontainer}}</td>
+                <td>
+                    <div class="buttons" >
+                        <button class="btn btn-primary editable-table-button btn-xs" 
+                                data-toggle="modal" ng-click="edit(c)">Ubah</button>
+                        <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data {{c.nama}}?" ng-confirm="hapus(c)">Hapus</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div align="center" ng-show="dataPage.totalPages > 1">
+            <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+            <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>
+        </div>
+    </div>
+</div>

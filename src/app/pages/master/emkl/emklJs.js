@@ -31,7 +31,6 @@
             $scope.listKota = data;
         });
 
-
         $scope.clear = function () {
             $scope.modalTitle = "";
             $scope.vm = {};
@@ -68,13 +67,24 @@
             });
         };
 
-        $scope.edit = function (x) {
-            $scope.ori = angular.copy(x);
-            $scope.modalTitle = "Edit Emkl";
-            console.log('edit', x);
-            EmklService.cariSatu("kode", x.id).success(function (data) {
-                $scope.vm = angular.copy(data);
-                $scope.ori = angular.copy($scope.vm);
+        $scope.edit = function (x, page, size) {
+            console.log('Open modal');
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: page,
+                controller: 'EmklModalController',
+                size: size,
+                resolve: {
+                    data: ['EmklService', function (EmklService) {
+                            var d = EmklService.cariSatu('id', x.id);
+                            return d;
+                        }]
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.reloadData();
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
             });
         };
 
@@ -93,12 +103,15 @@
         };
     }
 
-    function EmklModalController($uibModalInstance, toastr, $scope, EmklService, data) {
-        $scope.ori = angular.copy(data);
+    function EmklModalController($uibModalInstance, toastr, $scope, EmklService, data, KotaService) {
+        $scope.ori = angular.copy(data.data);
         $scope.modalTitle = "Edit Emkl";
-        console.log('edit', data);
-        $scope.vm = angular.copy(data);
+        console.log('edit', data.data);
+        $scope.vm = angular.copy(data.data);
 
+        KotaService.cariSemua().success(function (data) {
+            $scope.listKota = data;
+        });
 
         $scope.simpan = function () {
             EmklService.simpan($scope.vm, $scope.ori).success(function (d) {

@@ -23,13 +23,13 @@
                             {{((paging.currentPage-1)*paging.maxSize)+$index + 1}}
                         </td>
                         <td>
-                            {{ c.nama || 'empty' }}
+                            {{ c.nama}}
                         </td>
                         <td>
                             <div class="buttons" >
                                 <button class="btn btn-primary editable-table-button btn-xs" 
-                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/kondisi/kondisi-modal.html', 'md')">Edit</button>
-                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Kondisi {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
+                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/kondisi/kondisi-modal.html', 'md')">Ubah</button>
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Kondisi {{c.nama}}?" ng-confirm="hapus(c)">Hapus</button>
                             </div>
                         </td>
                     </tr>

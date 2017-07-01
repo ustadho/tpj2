@@ -1,0 +1,42 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12 input-group custom-search-form wrapper">
+            <input type="text" class="form-control" id="cari" name="cari" ng-model="cari" placeholder="Pencarian ..." autofocus="true" ng-enter="reloadData()">
+        </div>
+        <div class="well-large">
+            <div class="box-content">
+                <div when-scrolled="loadMore()" style="height: 360px; overflow: scroll;" >
+                    <table class="table table-striped table-bordered table-hover" fixed-header>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tujuan</th>
+                                <th>Kapal</th>
+                                <th>Tgl Brkt</th>
+                            </tr>
+                        </thead>
+
+                        <tbody >
+                            <tr ng-repeat="x in listData| filter:cari | limitTo:totalDisplayed" ng-click="pilih(x)">
+                                <td>{{$index+1}}</td>
+                                <td>{{x.kota.nama}}</td>
+                                <td>{{x.kapal.nama}}</td>
+                                <td>{{x.tglBerangkat | date:'dd-MM-yyyy'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+    </div>
+</div>

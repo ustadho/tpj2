@@ -61,7 +61,7 @@
             $scope.ori = angular.copy(x);
             $scope.modalTitle = "Edit Toko";
             console.log('edit', x);
-            TokoService.cariSatu("kode", x.id).success(function (data) {
+            TokoService.cariSatu("id", x.id).success(function (data) {
                 $scope.vm = angular.copy(data);
                 $scope.ori = angular.copy($scope.vm);
             });

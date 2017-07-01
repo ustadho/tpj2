@@ -1,0 +1,221 @@
+<div class="widgets" >
+    <h2>Entri Surat Jalan</h2>
+    <jhi-alert></jhi-alert>
+    <form name="form1">
+        <div class="row">
+            <div class="col-md-12" ng-controller="SuratJalanCtrl">
+                <div ba-panel >
+                    <div ba-panel ba-panel-title="Tujuan">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="kota">Kota</label>
+                                    </div>
+                                    <div class="col-sm-10" ng-class="{error: formKota.kota.$invalid}">
+                                        <ui-select ng-model="kota.selected"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-disabled="false"
+                                                   append-to-body="true"
+                                                   search-enabled="true">
+                                            <ui-select-match placeholder="Pilih Kota">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listKota | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="formKota.kota.$error.required">
+                                            Silahkan pilih kota tujuan
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Stuffing</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control with-success-addon" ng-model="vm.stuffing.kontainer.nomor" ng-disabled="true" ng-required="true">
+                                            <span class="input-group-btn">
+                                                <button class="btn input-group-addon-success" type="button" ng-click="lookupStuffing()" ng-disabled="kota.selected.id == null || kota.selected.id == 'undefined'">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="merk">MERK</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control with-success-addon" ng-model="vm.merk.nama" placeholder="" ng-enter="lookupMerk()" ng-disabled="kota.selected.id == null || kota.selected.id == 'undefined'" ng-required="true">
+                                            <span class="input-group-btn">
+                                                <button class="btn input-group-addon-success" type="button" ng-click="lookupMerk()" ng-disabled="(kota.selected.id == null || kota.selected.id == 'undefined') || vm.merk.nama === '' || vm.merk.nama === null || vm.merk.nama === 'undefined'">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="toko" class="col-sm-2 control-label">Toko</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="toko" placeholder="Toko" ng-disabled="true" ng-model="vm.merk.toko.nama" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>                                
+                    </div>
+                    <div ba-panel ba-panel-title="Pengirim">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="input02" class="col-sm-3 control-label">Tgl. Kirim</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input class="form-control" datetimepicker ng-model="vm.tanggal" options="options" name="tanggal"/>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tanggal.$error.required">
+                                                Harus Diisi
+                                            </span>                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="kondisi">Kondisi</label>
+                                    </div>
+                                    <div class="col-sm-10" ng-class="{error: formKota.kondisi.$invalid}">
+                                        <ui-select ng-model="vm.kondisi"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-disabled="false"
+                                                   append-to-body="true"
+                                                   search-enabled="true" 
+                                                   ng-required="true">
+                                            <ui-select-match placeholder="Pilih Kondisi">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listKondisi | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="formKota.kondisi.$error.required">
+                                            Silahkan pilih Kondisi
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Toko</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control with-success-addon" ng-model="vm.toko.nama" ng-enter="lookupToko()" >
+                                            <span class="input-group-btn">
+                                                <button class="btn input-group-addon-success" type="button" ng-click="lookupToko()" ng-disabled="vm.toko.nama === '' || vm.toko.nama === null || vm.toko.nama === 'undefined'">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="toko" class="col-sm-2 control-label">No. SJ</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="toko" ng-model="vm.nomorSJ" ng-disabled="vm.toko.id === null || vm.toko.id === 'undefined'">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                    </div>  
+                    <div ba-panel ba-panel-title="Item">-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div>
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" style="vertical-align: middle;text-align: center" class="1"> No</th>
+                                                <th rowspan="2" style="vertical-align: middle;text-align: center">COLI</th>
+                                                <th rowspan="2" style="vertical-align: middle;text-align: center">Jenis Barang</th>
+                                                <th colspan="3" style="vertical-align: middle;text-align: center">UKURAN</th>
+                                                <th rowspan="2" style="vertical-align: middle;text-align: center">M3/ TON</th>
+                                                <th rowspan="2" style="vertical-align: middle;text-align: center">Kontainer</th>
+                                                <th rowspan="2"  style="vertical-align: middle;text-align: center" class="col-md-2">
+                                                    <button ng-show="vm.stuffing.kontainer" class="btn btn-primary" ng-click="tambahItem()">Tambah Item</button>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th style="vertical-align: middle;text-align: center">P</th>
+                                                <th style="vertical-align: middle;text-align: center">L</th>
+                                                <th style="vertical-align: middle;text-align: center">T</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="c in vm.listSuratJalanDetail" class="editable-row">
+                                                <td>
+                                                    {{$index + 1}}
+                                                </td>
+                                                <td style="text-align:right"> {{c.coli| number:0 }}</td>
+                                                <td> {{c.item.nama }}</td>
+                                                <td style="text-align:right"> {{c.p| number:0 }}</td>
+                                                <td style="text-align:right"> {{c.l| number:0 }}</td>
+                                                <td style="text-align:right"> {{c.t| number:0 }}</td>
+                                                <td style="text-align:right"> {{c.fixVolume>0? c.fixVolume: hitungSubTotalMetrik(c) | number:4}}</td>
+                                                <td> 
+                                                    <button class="btn-primary btn-xs" 
+                                                                data-toggle="modal" ng-click="editSjStuffing(c)">{{c.sjStufings[0].stuffing.kontainer.nomor}}</button>
+                                                </td>
+                                                <td>
+                                                    <div class="buttons" >
+                                                        <button class="btn-primary btn-xs" 
+                                                                data-toggle="modal" ng-click="editItem(c, $index)">Ubah</button>
+                                                        <button class="btn-danger btn-xs" ng-confirm-message="Anda yakin akan menghapus item {{c.item.nama}}?" ng-confirm="hapusItem($index)">Hapus</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>Total Coli</td>
+                                                <td style="text-align:right"><b>{{totalColi}}</b></td>
+                                                <td colspan="4" style="text-align: right">Total Kubikasi</td>
+                                                <td style="text-align:right"><b> {{totKubikasi| number:4}}</b></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <hr>
+                        <div class="buttons pull-right" >                            
+                            <!--<button class="btn btn-primary btn-lg" data-toggle="modal" ng-confirm-message="Apakah Anda ingin melakukan proses pisah kontainer setelah simpan?" ng-confirm="simpan(true)" ng-not-confirm="simpan(false)" ng-disabled="vm.listSuratJalanDetail.length === 0 || form1.$invalid"> Simpan </button>-->
+                            <button class="btn btn-primary btn-lg" data-toggle="modal" ng-click="simpan(false)" ng-disabled="vm.listSuratJalanDetail.length === 0 || form1.$invalid"> Simpan </button>
+                            <button class="btn btn-danger btn-lg" ng-click="clear()">Reset</button>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

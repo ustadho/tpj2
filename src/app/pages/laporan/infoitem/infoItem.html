@@ -1,0 +1,137 @@
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+    <div ba-panel ba-panel-title="Info Item">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-sm-1">
+                        <label class="control-label" for="tglAwal">Tgl Awal</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <div class="input-group">
+                            <input class="form-control" datetimepicker ng-model="vm.tglAwal" options="options" name="tglAwal"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tglAwal.$error.required">
+                                Harus Diisi
+                            </span>                        
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <label class="control-label" for="tglAkhir">Tgl Akhir</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <div class="input-group">
+                            <input class="form-control" datetimepicker ng-model="vm.tglAkhir" options="options" name="tglAkhir"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tglAkhir.$error.required">
+                                Harus Diisi
+                            </span>                        
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-sm-1">
+                        <label class="control-label" for="toko">Toko</label>
+                    </div>
+                    <div class="col-sm-3" ng-class="{error: form1.toko.$invalid}">
+                        <p class="input-group">
+                        <ui-select ng-model="vm.toko"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="false"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Toko">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listToko | filter: $select.search">
+                                <span ng-bind-html="item.nama"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.toko = {};"><i class="glyphicon glyphicon-remove"></i></button>
+                        </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-1">
+
+                    </div>
+                    <div class="col-sm-3">
+                        <!--<div class=" form-group input-group">-->
+                        <input id="search" type="text" class="col-xs-2 form-control" ng-model="vm.cari" ng-keypress="$event.keyCode == 13 ? reloadData() : undefined"placeholder="Masukkan pencarian" autofocus>
+                        <!--                            <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button" ng-click="reloadData()"><i class="glyphicon glyphicon-search"></i>
+                                                        </button>
+                                                    </span>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-primary btn-md" ng-click="reloadData()"> Tampilkan </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <table class="table table-bordered table-hover table-condensed">
+            <tr>
+                <td></td>
+                <td>Tanggal</td>
+                <td>Item</td>
+                <td>Coli</td>
+                <td>Kubikasi</td>
+                <td>Kapal</td>
+                <td>Kontainer</td>                
+                <td>Cetak</td>                
+            </tr>
+            <tr ng-repeat="c in dataPage.content" class="editable-row">
+                <td>
+                    {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
+                </td>
+                <td>
+                    {{ c.tanggal | date:'dd-MM-yyyy' }}
+                </td>
+                <td>{{ c.item}}</td>
+                <td>{{ c.coli}}</td>
+                <td>{{ c.kubikasi}}</td>
+                <td>{{c.kapal}}</td>
+                <td>{{c.no_kontainer}}</td> 
+                <td>
+                    <div class="butons">
+                        <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                            <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
+                                P List <span class="caret"></span>
+                            </button>
+                            <ul uib-dropdown-menu>
+                                <li><a href ng-click="cetak(c, false, 'pdf')">PDF</a></li>
+                                <li><a href ng-click="cetak(c, false, 'xlsx')">XLS</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                            <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
+                                Expedisi<span class="caret"></span>
+                            </button>
+                            <ul uib-dropdown-menu>
+                                <li><a href ng-click="cetak(c, true, 'pdf')">PDF</a></li>
+                                <li><a href ng-click="cetak(c, true, 'xlsx')">XLS</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div align="center" ng-show="dataPage.totalPages > 1">
+            <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+            <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>
+        </div>
+    </div>
+</div>

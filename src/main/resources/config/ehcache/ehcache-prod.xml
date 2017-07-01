@@ -10,17 +10,17 @@
         <heap unit="entries">1000</heap>
     </cache-template>
 
-    <cache alias="id.alfatih.domain.User" uses-template="simple"/>
+    <cache alias="com.tpj.packinglist.domain.User" uses-template="simple"/>
 
-    <cache alias="id.alfatih.domain.Authority" uses-template="simple"/>
+    <cache alias="com.tpj.packinglist.domain.Authority" uses-template="simple"/>
 
-    <cache alias="id.alfatih.domain.User.authorities" uses-template="simple"/>
+    <cache alias="com.tpj.packinglist.domain.User.authorities" uses-template="simple"/>
 
-    <cache alias="id.alfatih.domain.PersistentToken" uses-template="simple"/>
+    <cache alias="com.tpj.packinglist.domain.PersistentToken" uses-template="simple"/>
 
-    <cache alias="id.alfatih.domain.User.persistentTokens" uses-template="simple"/>
+    <cache alias="com.tpj.packinglist.domain.User.persistentTokens" uses-template="simple"/>
 
-    <cache alias="id.alfatih.domain.JenisAkun" uses-template="simple"/>
+    <cache alias="com.tpj.packinglist.domain.JenisAkun" uses-template="simple"/>
 
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

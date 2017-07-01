@@ -5,11 +5,11 @@
         </button>
         <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
     </div>
-    <div class="modal-body">
-        <form class="form-horizontal" name="form1" id="formRate">
+    <form class="form-horizontal" name="form1" id="form1">
+        <div class="modal-body">
             <div>
                 <div class="form-group">
-                    <div class="col-xs-3">
+                    <div class="col-sm-3">
                         <label class="control-label" for="nama">Nama</label>
                     </div>
                     <div class="col-sm-8">
@@ -37,21 +37,14 @@
                     <div class="col-xs-3">
                         <label class="control-label" for="kota">Kota</label>
                     </div>
-                    <div class="col-sm-8">
-                        <ui-select ng-model="vm.kota"
-                                   class="btn-group bootstrap-select form-control"
-                                   ng-disabled="false"
-                                   append-to-body="true"
-                                   search-enabled="true">
-                            <ui-select-match placeholder="Pilih Kota">
-                                {{$select.selected.nama}}
-                            </ui-select-match>
-                            <ui-select-choices
-                                repeat="item in listKota | filter: $select.search">
-                                <span ng-bind-html="item.nama"></span>
+                    <div class="col-sm-8" ng-class="{error: form1.kota.$invalid}">
+                        <ui-select data-ng-model="vm.kota" name="kota" required class="btn-group bootstrap-select form-control">
+                            <ui-select-match placeholder="Pilih Kota">{{$select.selected.nama}}</ui-select-match>
+                            <ui-select-choices data-repeat="item in listKota  | filter: $select.search">
+                                <div data-ng-bind-html="item.nama | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
-                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tipe.$error.required">
                             Harus Diisi
                         </span>
                     </div>
@@ -78,14 +71,11 @@
                         </span>
                     </div>
                 </div>                    
-
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <button type="button" class="btn btn-primary" ng-click="simpan()" ng-disabled="form1.$invalid">Simpan</button>
-                    <button type="button" class="btn btn-danger" ng-click="clear()">Batal</button>
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="simpan()" ng-disabled="form1.$invalid">Simpan</button>
+            <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+        </div>
+    </form>
 </div>

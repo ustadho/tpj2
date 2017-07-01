@@ -33,7 +33,7 @@ public class LoggingAspect {
     /**
      * Pointcut that matches all repositories, services and Web REST endpoints.
      */
-    @Pointcut("within(id.alfatih.repository..*) || within(id.alfatih.service..*) || within(id.alfatih.web.rest..*)")
+    @Pointcut("within(com.tpj.packinglist.dao..*) || within(com.tpj.packinglist.service..*) || within(com.tpj.packinglist.web.rest..*)")
     public void loggingPointcut() {
         // Method is empty as this is just a Poincut, the implementations are in the advices.
     }

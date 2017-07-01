@@ -2,11 +2,12 @@
     'use strict';
 
     angular.module('tpjApp')
-            .controller('ItemCtrl', ItemCtrl)
+            .controller('ItemController', ItemController)
+            .controller('ItemModalController', ItemModalController)
             .controller('ItemUkuranModalController', ItemUkuranModalController);
 
     /** @ngInject */
-    function ItemCtrl($scope, $uibModal, $log, toastr, ItemService, JenisItemService) {
+    function ItemController($scope, $uibModal, $log, toastr, ItemService, JenisItemService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.modalTitle = "Tambah Item";
@@ -41,15 +42,40 @@
 
         $scope.baru = function () {
             console.log('Baru');
-            $scope.clear();
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/master/item/item-modal.html',
+                controller: 'ItemModalController',
+                size: 'md',
+                resolve: {
+                    data: {aktif: true}
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.reloadData();
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
         };
 
-        $scope.baru();
-        $scope.edit = function (x) {
-            $scope.ori = angular.copy(x);
-            $scope.modalTitle = "Edit Item";
-            console.log('edit', x);
-            $scope.vm = angular.copy(x);
+        $scope.edit = function (x, page, size) {
+            console.log('Open modal');
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: page,
+                controller: 'ItemModalController',
+                size: size,
+                resolve: {
+                    data: function () {
+                        return x;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.reloadData();
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
         };
 
         $scope.hapus = function (x) {
@@ -72,7 +98,7 @@
                 animation: true,
                 templateUrl: 'app/pages/master/item/itemUkuranModal.html',
                 controller: 'ItemUkuranModalController',
-                size: 'lg',
+                size: 'md',
                 resolve: {
                     data: function () {
                         return x;
@@ -85,6 +111,23 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
+    }
+
+    function ItemModalController($uibModalInstance, toastr, $scope, ItemService, JenisItemService, data) {
+        $scope.ori = angular.copy(data);
+        $scope.modalTitle = "Edit Item";
+        console.log('edit', data);
+        $scope.vm = angular.copy(data);
+
+        JenisItemService.cariSemua().success(function (data) {
+            $scope.listJenisItem = data;
+        });
+        $scope.simpan = function () {
+            ItemService.simpan($scope.vm, $scope.ori).success(function (d) {
+                $uibModalInstance.close($scope.vm);
+                toastr.success('Simpan data sukses!');
+            })
+        }
     }
 
     function ItemUkuranModalController($uibModalInstance, toastr, $scope, ItemUkuranService, data) {
@@ -118,9 +161,10 @@
         $scope.baru = function () {
             console.log('Baru');
             $scope.clear();
+            $scope.isNew = true;
         };
 
-        $scope.baru();
+//        $scope.baru();
         $scope.edit = function (x) {
             $scope.ori = angular.copy(x);
             $scope.modalTitle = "Edit Ukuran untuk Item " + data.nama;
@@ -141,9 +185,12 @@
                 toastr.success('Simpan data sukses!');
                 $scope.clear();
                 $scope.reloadData();
+                $scope.isNew = false;
             });
         };
-
+        $scope.batal = function () {
+            $scope.isNew = false;
+        }
     }
 })();
 

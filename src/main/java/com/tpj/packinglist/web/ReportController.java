@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -151,5 +152,54 @@ public class ReportController {
         logger.warn("tgl2: [{}]", tgl2);
         logger.warn("order: [{}]", order);
         return dao.rekapColiKubikasiPerGrup(grup, tgl1, tgl2, order, limit);
+    }
+    
+    @RequestMapping(value = "/list-bast/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    private Object listBast(@PathVariable Integer id) {
+        return dao.listBast(id);
+    }
+    
+    @RequestMapping(value = "bast*", method = RequestMethod.GET)
+    private ModelMap bast(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String idKapalBerangkat = request.getParameter("k");
+        String idMerk = request.getParameter("m");
+        String idEmkl = request.getParameter("e");
+        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+        realPath = realPath.replace("\\", "\\\\");
+        logger.warn("format: [{}]", format);
+        logger.warn("id: [{}]", idKapalBerangkat);
+        logger.warn("idMerk: [{}]", idMerk);
+
+        return new ModelMap()
+                //                .addAttribute("tanggal1", tg1)
+                //                .addAttribute("logo", realPath + "igg-kop.jpg")
+                .addAttribute("realPath", realPath)
+                .addAttribute("format", format)
+                .addAttribute("dataSource", dao.bast(
+                        Integer.valueOf(idKapalBerangkat), 
+                        Integer.valueOf(idMerk),
+                        Integer.valueOf(idEmkl)));
+    }
+    @RequestMapping(value = "rekap-merk*", method = RequestMethod.GET)
+    private ModelMap rekapPerMerk(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String idStuffing = request.getParameter("id");
+        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+        realPath = realPath.replace("\\", "\\\\");
+        logger.warn("format: [{}]", format);
+        logger.warn("id: [{}]", idStuffing);
+
+        return new ModelMap()
+                //                .addAttribute("tanggal1", tg1)
+                //                .addAttribute("logo", realPath + "igg-kop.jpg")
+                .addAttribute("realPath", realPath)
+                .addAttribute("format", format)
+                .addAttribute("dataSource", dao.rekapMerk(Integer.valueOf(idStuffing)));
     }
 }

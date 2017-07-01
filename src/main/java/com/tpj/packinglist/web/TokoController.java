@@ -77,7 +77,7 @@ public class TokoController {
     @RequestMapping(value = "{column}/{value}", method = RequestMethod.GET)
     public Toko cariSatu(@PathVariable("column") String column, @PathVariable("value") String value) {
         Toko hasil=null;
-        if (column.equalsIgnoreCase("kode")) {
+        if (column.equalsIgnoreCase("id")) {
             hasil = dao.findOne(Integer.valueOf(value));
         } else if (column.equalsIgnoreCase("nama")) {
             hasil = dao.findByNama(value);
